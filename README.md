@@ -26,11 +26,16 @@ This repo contains the code for my fitness marketplace app called trainr. The ap
 
 This is a big project, so I want to break it down into a proof of concept that I can create within shorter time! It should have at least the following aspects:
 
+For now:
+
 - Users can register +
 - Users can login +
 - Users can edit their account details +
 - Users can create a trainer account (permanent) +
-- User can input their weight daily
+- Users can input their weight daily
 - Users can create a workout template
 - Users can select the workout template and input their stats
+
+Later:
+
 - Users and trainers can chat
