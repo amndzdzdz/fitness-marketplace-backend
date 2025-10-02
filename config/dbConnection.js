@@ -22,8 +22,6 @@ const connectDB = async () => {
 
     setTimeout(() => {
       mongoose.connect(url, {
-        useNewurlParser: true,
-        useUnifiedTopology: true,
         keepAlive: true,
         socketTimoutMS: 3000,
         connectTimeoutMS: 3000,
@@ -39,14 +37,9 @@ const connectDB = async () => {
     console.log("Databse connection error: " + error);
   });
 
-  await mongoose
-    .connect(url, {
-      useNewurlParser: true,
-      useUnifiedTopology: true,
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  await mongoose.connect(url).catch((error) => {
+    console.log(error);
+  });
 };
 
 module.exports = connectDB;
