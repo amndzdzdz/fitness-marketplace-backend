@@ -71,7 +71,9 @@ const registerUser = asyncHandler(async (req, res) => {
 //@route GET /api/users/current
 //@access private
 const getCurrentUser = asyncHandler(async (req, res) => {
-  res.status(200).json(req.user);
+  const currentUserId = req.user.id;
+  const currentUser = await User.findOne({ id: currentUserId });
+  res.status(200).json({ message: currentUser });
 });
 
 //@desc Update the user info
@@ -79,9 +81,9 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 //@access private
 const updateUser = asyncHandler(async (req, res) => {
   const { username, email, password, profileInfo } = req.body;
-  const currentUserId = req.user.id;
+  const currentUser = req.user.id;
   const updatedUser = await User.findOneAndUpdate(
-    { id: currentUserId },
+    { id: currentUser },
     {
       username: username,
       email: email,
@@ -96,7 +98,9 @@ const updateUser = asyncHandler(async (req, res) => {
 //@route DELETE /api/users/login
 //@access private
 const deleteUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "deleted user" });
+  const currentUser = req.user.id;
+  const deletedUser = await User.findOneAndDelete({ id: currentUser });
+  res.status(200).json({ message: deletedUser });
 });
 
 module.exports = {
