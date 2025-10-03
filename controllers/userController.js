@@ -81,6 +81,10 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 //@access private
 const updateUser = asyncHandler(async (req, res) => {
   const { username, email, password, profileInfo } = req.body;
+  if (!username || !email || !password) {
+    res.status(400);
+    throw new Error("User information can not be empty");
+  }
   const currentUser = req.user.id;
   const updatedUser = await User.findOneAndUpdate(
     { id: currentUser },
