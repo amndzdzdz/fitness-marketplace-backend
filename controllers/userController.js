@@ -46,6 +46,10 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Email address already exists");
   }
+  if (username.length < 3) {
+    res.status(400);
+    throw new Error("Username must be bigger than 3 characters.");
+  }
   const hashedPassword = await bcrypt.hash(password, 10);
   const createdUser = await User.create({
     username,
@@ -67,7 +71,7 @@ const registerUser = asyncHandler(async (req, res) => {
 //@route GET /api/users/current
 //@access private
 const getCurrentUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "Current user" });
+  res.status(200).json(req.user);
 });
 
 //@desc Update the user info
