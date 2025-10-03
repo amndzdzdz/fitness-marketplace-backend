@@ -6,14 +6,15 @@ const {
   registerUser,
   deleteUser,
 } = require("../controllers/userController");
+const validateToken = require("../middleware/validateTokenHandler");
 
 const router = express.Router();
 
 router.post("/login", loginUser);
 router.post("/register", registerUser);
 router
-  .get("/current", getCurrentUser)
-  .put("/current", updateUser)
-  .delete("/current", deleteUser);
+  .get("/current", validateToken, getCurrentUser)
+  .put("/current", validateToken, updateUser)
+  .delete("/current", validateToken, deleteUser);
 
 module.exports = router;
