@@ -1,12 +1,35 @@
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
 //@desc Login the user
 //@route POST /api/users/login
 //@access public
 const loginUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "User login" });
+  const { email, password } = req.body;
+  if (!email || !password) {
+    res.status(400);
+    throw new Error("All fields are mandaotry");
+  }
+  const userExists = await User.findOne({ email });
+  if (userExists && (await bcrypt.compare(password, userExists.password))) {
+    const accessToken = jwt.sign(
+      {
+        user: {
+          username: userExists.username,
+          email: userExists.email,
+          id: userExists.id,
+        },
+      },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "1h" }
+    );
+    res.status(200).json({ accessToken });
+  } else {
+    res.status(401);
+    throw new Error("Email or password is false");
+  }
 });
 
 //@desc Register the user
