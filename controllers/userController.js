@@ -65,21 +65,21 @@ const registerUser = asyncHandler(async (req, res) => {
 
 //@desc Get the current user info
 //@route GET /api/users/current
-//@access public
+//@access private
 const getCurrentUser = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Current user" });
 });
 
 //@desc Update the user info
 //@route PUT /api/users/current
-//@access public
+//@access private
 const updateUser = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Updated user" });
 });
 
 //@desc Delete a user
 //@route DELETE /api/users/login
-//@access public
+//@access private
 const deleteUser = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "deleted user" });
 });
