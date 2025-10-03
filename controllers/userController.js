@@ -78,7 +78,18 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 //@route PUT /api/users/current
 //@access private
 const updateUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "Updated user" });
+  const { username, email, password, profileInfo } = req.body;
+  const currentUserId = req.user.id;
+  const updatedUser = await User.findOneAndUpdate(
+    { id: currentUserId },
+    {
+      username: username,
+      email: email,
+      password: password,
+      profileInfo: profileInfo,
+    }
+  );
+  res.status(200).json({ message: updatedUser });
 });
 
 //@desc Delete a user
