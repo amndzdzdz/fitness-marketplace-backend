@@ -11,7 +11,7 @@ const getWeight = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("A date is required to fetch the weight");
   }
-  const currentWeight = Weight.findOne({
+  const currentWeight = await Weight.findOne({
     userId: req.user.id,
     date: date,
   });
@@ -25,7 +25,20 @@ const getWeight = asyncHandler(async (req, res) => {
 //@desc Set the weight
 //@route POST api/weight/current
 //@access public
-const setWeight = "";
+const setWeight = asyncHandler(async (req, res) => {
+  const { date, weight } = req.body;
+  if (!date || !weight) {
+    res.status(400);
+    throw new Error("Date and weight is mandatory");
+  }
+  const userId = req.user.id;
+  const createdWeight = await Weight.create({
+    userId: userId,
+    date: date,
+    weight: weight,
+  });
+  res.status(200).json(createdWeight);
+});
 
 //@desc Update the weight
 //@route PUT api/weight/current
