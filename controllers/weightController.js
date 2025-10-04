@@ -5,7 +5,22 @@ const Weight = require("../models/weightModel");
 //@desc Get the weight
 //@route GET api/weight/current
 //@access public
-const getWeight = "";
+const getWeight = asyncHandler(async (req, res) => {
+  const { date } = req.body;
+  if (!date) {
+    res.status(400);
+    throw new Error("A date is required to fetch the weight");
+  }
+  const currentWeight = Weight.findOne({
+    userId: req.user.id,
+    date: date,
+  });
+  if (!currentWeight) {
+    res.status(400);
+    throw new Error(`There is no weight for the date: ${date}`);
+  }
+  res.status(200).json({ weight: currentWeight });
+});
 
 //@desc Set the weight
 //@route POST api/weight/current
