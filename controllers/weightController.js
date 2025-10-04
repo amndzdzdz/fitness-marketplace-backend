@@ -69,6 +69,23 @@ const updateWeight = asyncHandler(async (req, res) => {
 //@desc Delete weight
 //@route DELETE api/weight/current
 //@access public
-const deleteWeight = "";
+const deleteWeight = asyncHandler(async (req, res) => {
+  const { date } = req.body;
+  if (!date) {
+    res.status(400);
+    throw new Error("Date is required");
+  }
+  const userId = req.user.id;
+  const weightExists = await Weight.findOne({ userId: userId, date: date });
+  if (!weightExists) {
+    res.status(400);
+    throw new Error("The weight doesnt exist");
+  }
+  const deletedWeight = await Weight.findOneAndDelete({
+    userId: userId,
+    date: date,
+  });
+  res.status(200).json({ message: deletedWeight });
+});
 
 module.exports = { getWeight, setWeight, updateWeight, deleteWeight };
