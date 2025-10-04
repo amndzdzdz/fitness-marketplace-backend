@@ -4,11 +4,12 @@ const weightSchema = mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      required: true,
+      ref: "User",
     },
     date: {
       type: Date,
-      required: [true],
+      required: true,
     },
     weight: {
       type: Number,
