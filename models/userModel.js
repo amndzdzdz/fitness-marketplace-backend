@@ -14,6 +14,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "A password is required"],
     },
+    isTrainer: {
+      type: Boolean,
+      default: false,
+    },
     profileInfo: {
       bio: {
         type: String,
