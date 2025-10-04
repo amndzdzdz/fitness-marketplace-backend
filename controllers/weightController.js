@@ -43,7 +43,28 @@ const setWeight = asyncHandler(async (req, res) => {
 //@desc Update the weight
 //@route PUT api/weight/current
 //@access public
-const updateWeight = "";
+const updateWeight = asyncHandler(async (req, res) => {
+  const { date, weight } = req.body;
+  if (!date || !weight) {
+    res.status(400);
+    throw new Error("Date and weight are required!");
+  }
+  console.log(`Date: ${date} and weight: ${weight}`);
+  const userId = req.user.id;
+  const weightExists = await Weight.findOne({ userId: userId, date: date });
+  if (!weightExists) {
+    res.status(400);
+    throw new Error("The weight doesnt exist");
+  }
+  const updatedWeigth = await Weight.findOneAndUpdate(
+    {
+      userId: userId,
+      date: date,
+    },
+    { weight: weight }
+  );
+  res.status(200).json({ message: updateWeight });
+});
 
 //@desc Delete weight
 //@route DELETE api/weight/current
