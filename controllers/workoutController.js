@@ -20,6 +20,19 @@ const createWorkout = asyncHandler(async (req, res) => {
   res.status(200).json({ message: createdWorkout });
 });
 
+//@desc get all workout from a user
+//@route GET /api/workout/all
+//@acces private
+const getWorkouts = asyncHandler(async (req, res) => {
+  const userId = req.user.id;
+  const workoutRoutines = await Workout.find({ userId: userId });
+  if (!workoutRoutines) {
+    res.status(200).json({ message: [] });
+  } else {
+    res.status(200).json({ message: workoutRoutines });
+  }
+});
+
 //@desc get a workout
 //@route GET /api/workout/
 //@acces public
@@ -37,6 +50,7 @@ const deleteWorkout = "";
 
 module.exports = {
   createWorkout,
+  getWorkouts,
   getWorkout,
   updateWorkout,
   deleteWorkout,
