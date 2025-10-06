@@ -9,8 +9,8 @@ connectDB();
 
 app.use(express.json());
 app.use("/api/users", require("./routes/userRoutes"));
-app.use("/api/weight", require("./routes/weightRoute"));
-app.use("/api/workout", require("./routes/workoutRoutine"));
+app.use("/api/weight", require("./routes/weightRoutes"));
+app.use("/api/workout", require("./routes/workoutRoutes"));
 app.use(errorHandler);
 
 app.listen(port, () => {
