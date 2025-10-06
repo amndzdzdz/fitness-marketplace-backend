@@ -3,7 +3,7 @@ const Weight = require("../models/weightModel");
 
 //@desc Get the weight
 //@route GET api/weight/current
-//@access public
+//@access private
 const getWeight = asyncHandler(async (req, res) => {
   const { date } = req.body;
   if (!date) {
@@ -23,7 +23,7 @@ const getWeight = asyncHandler(async (req, res) => {
 
 //@desc Set the weight
 //@route POST api/weight/current
-//@access public
+//@access private
 const setWeight = asyncHandler(async (req, res) => {
   const { date, weight } = req.body;
   if (!date || !weight) {
@@ -41,7 +41,7 @@ const setWeight = asyncHandler(async (req, res) => {
 
 //@desc Update the weight
 //@route PUT api/weight/current
-//@access public
+//@access private
 const updateWeight = asyncHandler(async (req, res) => {
   const { date, weight } = req.body;
   if (!date || !weight) {
@@ -67,7 +67,7 @@ const updateWeight = asyncHandler(async (req, res) => {
 
 //@desc Delete weight
 //@route DELETE api/weight/current
-//@access public
+//@access private
 const deleteWeight = asyncHandler(async (req, res) => {
   const { date } = req.body;
   if (!date) {
