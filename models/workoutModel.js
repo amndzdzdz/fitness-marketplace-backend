@@ -31,7 +31,7 @@ const workoutSchema = mongoose.Schema(
       ref: "User",
     },
     exercises: {
-      type: List[exerciseSchema],
+      type: [exerciseSchema],
       required: [true, "Exercises are required"],
     },
   },
