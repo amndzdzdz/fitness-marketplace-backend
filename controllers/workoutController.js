@@ -42,7 +42,7 @@ const getWorkout = asyncHandler(async (req, res) => {
     throw new Error("Workout does not exist");
   }
   const workout = await Workout.findOne({ _id: workoutId });
-  res.status(200).json(workout);
+  res.status(200).json({ message: workout });
 });
 
 //@desc update a workout
@@ -53,7 +53,16 @@ const updateWorkout = "";
 //@desc delete a workout
 //@route DELETE /api/workout
 //@acces private
-const deleteWorkout = "";
+const deleteWorkout = asyncHandler(async (req, res) => {
+  const { workoutId } = req.query;
+  console.log(workoutId);
+  if (!workoutId) {
+    res.status(404);
+    throw new Error("Workout ID required to delete workout");
+  }
+  const deletedWorkout = await Workout.findOneAndDelete({ id: workoutId });
+  res.status(200).json({ message: deletedWorkout });
+});
 
 module.exports = {
   createWorkout,
