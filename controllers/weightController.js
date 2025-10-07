@@ -70,7 +70,7 @@ const updateWeight = asyncHandler(async (req, res) => {
 //@route DELETE api/weight/current
 //@access private
 const deleteWeight = asyncHandler(async (req, res) => {
-  const { date } = req.body;
+  const { date } = req.query;
   if (!date) {
     res.status(400);
     throw new Error("Date is required");
