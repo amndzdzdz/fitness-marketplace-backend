@@ -5,7 +5,8 @@ const Weight = require("../models/weightModel");
 //@route GET api/weight/current
 //@access private
 const getWeight = asyncHandler(async (req, res) => {
-  const { date } = req.body;
+  const { date } = req.query;
+  console.log(date);
   if (!date) {
     res.status(400);
     throw new Error("A date is required to fetch the weight");
