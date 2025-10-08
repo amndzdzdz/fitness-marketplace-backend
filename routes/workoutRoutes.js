@@ -1,6 +1,7 @@
 const express = require("express");
 const validateToken = require("../middleware/validateTokenHandler");
 const {
+  getWorkouts,
   getWorkout,
   updateWorkout,
   createWorkout,
@@ -9,9 +10,11 @@ const {
 const router = express.Router();
 
 router
-  .get("/", validateToken, getWorkout)
-  .put("/", validateToken, updateWorkout)
   .post("/", validateToken, createWorkout)
-  .delete("/", validateToken, deleteWorkout);
+  .get("/", validateToken, getWorkout)
+  .delete("/", validateToken, deleteWorkout)
+  .put("/", validateToken, updateWorkout);
+
+router.get("/all", validateToken, getWorkouts);
 
 module.exports = router;
