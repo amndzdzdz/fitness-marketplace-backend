@@ -48,7 +48,24 @@ const getWorkout = asyncHandler(async (req, res) => {
 //@desc update a workout
 //@route PUT /api/workout
 //@acces private
-const updateWorkout = "";
+const updateWorkout = asyncHandler(async (req, res) => {
+  const { workoutId, name, exercises } = req.body;
+  if (!workoutId || !name || !exercises) {
+    res.status(400);
+    throw new Error(
+      "Workout ID, name and exercises required to update workout"
+    );
+  }
+  const userId = req.user.id;
+  const updatedWorkout = await Workout.findOneAndUpdate(
+    {
+      userId: userId,
+      _id: workoutId,
+    },
+    { name: name, exercises: exercises }
+  );
+  res.status(200).json({ message: updatedWorkout });
+});
 
 //@desc delete a workout
 //@route DELETE /api/workout
