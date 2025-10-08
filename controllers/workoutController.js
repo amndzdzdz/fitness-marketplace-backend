@@ -10,7 +10,6 @@ const createWorkout = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("All fields are required!");
   }
-  console.log(exercises);
   const createdWorkout = await Workout.create({
     name: name,
     userId: req.user.id,
@@ -72,7 +71,6 @@ const updateWorkout = asyncHandler(async (req, res) => {
 //@acces private
 const deleteWorkout = asyncHandler(async (req, res) => {
   const { workoutId } = req.query;
-  console.log(workoutId);
   if (!workoutId) {
     res.status(404);
     throw new Error("Workout ID required to delete workout");
