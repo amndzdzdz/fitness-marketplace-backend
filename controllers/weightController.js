@@ -6,7 +6,6 @@ const Weight = require("../models/weightModel");
 //@access private
 const getWeight = asyncHandler(async (req, res) => {
   const { date } = req.query;
-  console.log(date);
   if (!date) {
     res.status(400);
     throw new Error("A date is required to fetch the weight");
@@ -49,7 +48,6 @@ const updateWeight = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Date and weight are required!");
   }
-  console.log(`Date: ${date} and weight: ${weight}`);
   const userId = req.user.id;
   const weightExists = await Weight.findOne({ userId: userId, date: date });
   if (!weightExists) {
