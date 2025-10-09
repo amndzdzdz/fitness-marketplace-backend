@@ -36,3 +36,9 @@ const createWorkoutSession = asyncHandler(async (req, res) => {
   }
   res.status(200).json({ message: workoutSession });
 });
+
+module.exports = {
+  createWorkoutSession,
+  getWorkoutSession,
+  getWorkoutSessions,
+};
