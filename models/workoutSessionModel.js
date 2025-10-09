@@ -20,11 +20,11 @@ const workoutSessionSchema = mongoose.Schema({
       setsInfo: [
         {
           weight: {
-            type: Int,
+            type: Number,
             required: [true, "Lifted weight is required"],
           },
           reps: {
-            type: Int,
+            type: Number,
             required: [true, "Reps is required"],
           },
         },
