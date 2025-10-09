@@ -26,7 +26,7 @@ const getWorkoutSession = asyncHandler(async (req, res) => {
 //@route GET /api/workoutSession/all
 //@access private
 const getWorkoutSessions = asyncHandler(async (req, res) => {
-  const { userId } = req.user.id;
+  const userId = req.user.id;
   const workoutSessions = await WorkoutSession.find({ userId: userId });
   res.status(200).json({ message: workoutSessions });
 });
