@@ -11,7 +11,7 @@ app.use(express.json());
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/weight", require("./routes/weightRoutes"));
 app.use("/api/workout", require("./routes/workoutRoutes"));
-app.use("api/workoutSession", require("./routes/workoutSessionRoutes"));
+app.use("/api/workoutSession", require("./routes/workoutSessionRoutes"));
 app.use(errorHandler);
 
 app.listen(port, () => {
