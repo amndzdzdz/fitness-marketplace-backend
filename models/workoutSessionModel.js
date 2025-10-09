@@ -13,7 +13,7 @@ const workoutSessionSchema = mongoose.Schema({
   },
   sessionInfo: [
     {
-      exericseName: {
+      exerciseName: {
         type: String,
         required: [true, "Exercise name is required"],
       },
