@@ -33,4 +33,4 @@ const workoutSessionSchema = mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model("WorkoutSession", workoutSessionSchema);
+module.exports = mongoose.model("workoutSession", workoutSessionSchema);
