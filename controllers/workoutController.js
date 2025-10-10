@@ -7,7 +7,7 @@ const Workout = require("../models/workoutModel");
 const createWorkout = asyncHandler(async (req, res) => {
   const { name, exercises } = req.body;
   if (!name || !exercises) {
-    res.status(404);
+    res.status(400);
     throw new Error("All fields are required!");
   }
   const createdWorkout = await Workout.create({
@@ -32,12 +32,12 @@ const getWorkouts = asyncHandler(async (req, res) => {
 });
 
 //@desc get a workout
-//@route GET /api/workout/
+//@route GET /api/workout
 //@acces private
 const getWorkout = asyncHandler(async (req, res) => {
   const { workoutId } = req.query;
   if (!workoutId) {
-    res.status(404);
+    res.status(400);
     throw new Error("Workout does not exist");
   }
   const workout = await Workout.findOne({ _id: workoutId });
@@ -72,10 +72,10 @@ const updateWorkout = asyncHandler(async (req, res) => {
 const deleteWorkout = asyncHandler(async (req, res) => {
   const { workoutId } = req.query;
   if (!workoutId) {
-    res.status(404);
+    res.status(400);
     throw new Error("Workout ID required to delete workout");
   }
-  const deletedWorkout = await Workout.findOneAndDelete({ id: workoutId });
+  const deletedWorkout = await Workout.findOneAndDelete({ _id: workoutId });
   res.status(200).json({ message: deletedWorkout });
 });
 
