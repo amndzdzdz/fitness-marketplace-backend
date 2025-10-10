@@ -28,11 +28,15 @@ const getWorkoutSession = asyncHandler(async (req, res) => {
 const getWorkoutSessions = asyncHandler(async (req, res) => {
   const userId = req.user.id;
   const workoutSessions = await WorkoutSession.find({ userId: userId });
+  if (!workoutSessions) {
+    res.status(400);
+    throw new Error("WorkoutSession does not exist");
+  }
   res.status(200).json({ message: workoutSessions });
 });
 
 //@desc Create a workoutSession
-//@route POST /api/workoutSession/
+//@route POST /api/workoutSession
 //@access private
 const createWorkoutSession = asyncHandler(async (req, res) => {
   const { workoutId, sessionInfo } = req.body;
