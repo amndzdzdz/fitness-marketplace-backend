@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const Weight = require("../models/weightModel");
 
 //@desc Get the weight
-//@route GET api/weight/current
+//@route GET /api/weight/current
 //@access private
 const getWeight = asyncHandler(async (req, res) => {
   const { date } = req.query;
@@ -21,8 +21,8 @@ const getWeight = asyncHandler(async (req, res) => {
   res.status(200).json({ weight: currentWeight });
 });
 
-//@desc Set the weight
-//@route POST api/weight/current
+//@desc Set a weight
+//@route POST /api/weight/current
 //@access private
 const setWeight = asyncHandler(async (req, res) => {
   const { date, weight } = req.body;
@@ -36,11 +36,11 @@ const setWeight = asyncHandler(async (req, res) => {
     date: date,
     weight: weight,
   });
-  res.status(200).json(createdWeight);
+  res.status(200).json({ weight: createdWeight });
 });
 
 //@desc Update the weight
-//@route PUT api/weight/current
+//@route PUT /api/weight/current
 //@access private
 const updateWeight = asyncHandler(async (req, res) => {
   const { date, weight } = req.body;
@@ -61,11 +61,11 @@ const updateWeight = asyncHandler(async (req, res) => {
     },
     { weight: weight }
   );
-  res.status(200).json({ message: updateWeight });
+  res.status(200).json({ message: updatedWeigth });
 });
 
 //@desc Delete weight
-//@route DELETE api/weight/current
+//@route DELETE /api/weight/current
 //@access private
 const deleteWeight = asyncHandler(async (req, res) => {
   const { date } = req.query;
@@ -83,7 +83,7 @@ const deleteWeight = asyncHandler(async (req, res) => {
     userId: userId,
     date: date,
   });
-  res.status(200).json({ message: deletedWeight });
+  res.status(200).json({ weight: deletedWeight });
 });
 
 module.exports = { getWeight, setWeight, updateWeight, deleteWeight };
