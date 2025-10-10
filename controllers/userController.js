@@ -72,7 +72,7 @@ const registerUser = asyncHandler(async (req, res) => {
 //@access private
 const getCurrentUser = asyncHandler(async (req, res) => {
   const currentUserId = req.user.id;
-  const currentUser = await User.findOne({ id: currentUserId });
+  const currentUser = await User.findOne({ _id: currentUserId });
   res.status(200).json({ message: currentUser });
 });
 
@@ -88,7 +88,7 @@ const updateUser = asyncHandler(async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10);
   const currentUser = req.user.id;
   await User.findOneAndUpdate(
-    { id: currentUser },
+    { _id: currentUser },
     {
       username: username,
       email: email,
@@ -97,7 +97,7 @@ const updateUser = asyncHandler(async (req, res) => {
       profileInfo: profileInfo,
     }
   );
-  const updatedUser = await User.findOne({ id: currentUser });
+  const updatedUser = await User.findOne({ _id: currentUser });
   res.status(200).json({ message: updatedUser });
 });
 
@@ -106,7 +106,7 @@ const updateUser = asyncHandler(async (req, res) => {
 //@access private
 const deleteUser = asyncHandler(async (req, res) => {
   const currentUser = req.user.id;
-  const deletedUser = await User.findOneAndDelete({ id: currentUser });
+  const deletedUser = await User.findOneAndDelete({ _id: currentUser });
   res.status(200).json({ message: deletedUser });
 });
 
