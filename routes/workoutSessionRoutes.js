@@ -5,11 +5,12 @@ const {
   getWorkoutSession,
   createWorkoutSession,
 } = require("../controllers/workoutSessionController");
+
 const router = express.Router();
 
+router.get("/all", validateToken, getWorkoutSessions);
 router
   .get("/", validateToken, getWorkoutSession)
   .post("/", validateToken, createWorkoutSession);
-router.get("/all", validateToken, getWorkoutSessions);
 
 module.exports = router;

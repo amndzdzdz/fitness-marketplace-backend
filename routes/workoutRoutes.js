@@ -7,14 +7,14 @@ const {
   createWorkout,
   deleteWorkout,
 } = require("../controllers/workoutController");
+
 const router = express.Router();
 
+router.get("/all", validateToken, getWorkouts);
 router
   .post("/", validateToken, createWorkout)
   .get("/", validateToken, getWorkout)
   .delete("/", validateToken, deleteWorkout)
   .put("/", validateToken, updateWorkout);
-
-router.get("/all", validateToken, getWorkouts);
 
 module.exports = router;
